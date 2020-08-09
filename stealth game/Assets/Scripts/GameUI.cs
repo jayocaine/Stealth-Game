@@ -21,7 +21,7 @@ public class GameUI : MonoBehaviour
     {
         if (gameIsOver) 
         {
-            if (Input.GetKeyDown(KeyCode.Space)) 
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire2") )
             {
                 SceneManager.LoadScene(0);
             }
