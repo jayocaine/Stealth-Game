@@ -23,7 +23,7 @@ public class GameUI : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire2") )
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
     }
