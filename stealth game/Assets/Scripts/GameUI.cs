@@ -9,6 +9,8 @@ public class GameUI : MonoBehaviour
     public GameObject gamesLoseUI;
     public GameObject gameWinUI;
     bool gameIsOver;
+    bool hasWon;
+    bool hasLost;
  
     void Start()
     {
@@ -19,22 +21,31 @@ public class GameUI : MonoBehaviour
   
     void Update()
     {
-        if (gameIsOver) 
+        if (gameIsOver && hasWon) 
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire2") )
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
+        if(gameIsOver && hasLost) 
+        {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire2"))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+            }
+        }
     }
     void ShowGameWinUI() 
     {
         OnGameOver(gameWinUI);
+         hasWon = true;
 
     }
-    void ShowGameLoseUI()
+     void ShowGameLoseUI()
     {
         OnGameOver(gamesLoseUI);
+         hasLost = true;
     }
     void OnGameOver(GameObject gameOverUI)
     {

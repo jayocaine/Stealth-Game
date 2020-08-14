@@ -18,12 +18,15 @@ public class Guard : MonoBehaviour
     public float viewDistance;
     private float viewAngle;
 
+    
+
     float playerVisibleTimer;
     float timeToSpotPlayer = .5f;
 
     Color originalSpotlightColor;
     private void Start()
     {
+       
         originalSpotlightColor = spotLight.color;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3[] wayPoints = new Vector3[pathHolder.childCount];
@@ -121,4 +124,5 @@ public class Guard : MonoBehaviour
             yield return null;
         }
     }
+
 }

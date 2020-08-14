@@ -6,7 +6,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public event System.Action OnReachedEndOfLevel;
-    private Animator anim;
     
     public float moveSpeed = 7;
     public float smoothMoveTime = .1f;
@@ -28,7 +27,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
         Guard.OnGuardHasSpottedPlayer += Disable;
     }
 
@@ -47,10 +45,7 @@ public class Player : MonoBehaviour
         angle = Mathf.LerpAngle(angle, targetAngle, Time.deltaTime * turnSpeed * inputMagnitude);
 
         velocity = transform.forward * moveSpeed * smoothInputMagnitude;
-        if(Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Vertical") > 0)
-        {
-            anim.SetBool("isWalking", true);
-        }
+       
         
     }
     private void FixedUpdate()
@@ -66,12 +61,15 @@ public class Player : MonoBehaviour
             if (OnReachedEndOfLevel != null) 
             {
                 OnReachedEndOfLevel();
+
             }
+            hasKey = false;
         }
         if(hitCollider.tag == "Key") 
         {
             hasKey = true;
             print("haskey");
+            Destroy(GameObject.FindGameObjectWithTag("Key"));
         }
     }
     void Disable() 
