@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4905280341074881523}
   - component: {fileID: 4905280341074881526}
   - component: {fileID: 5887568764428471120}
+  - component: {fileID: 3237216522994605429}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4905280341074881520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.3, y: 6.97, z: -11.6}
+  m_LocalPosition: {x: -26.13, y: 6.93, z: -11.6}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,6 +55,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0505a85a6ac682a42a2566fec044bc59, type: 2}
+  - {fileID: 2100000, guid: 55d35e8ee4a768e4fbb47d81bfd930e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,6 +104,7 @@ MonoBehaviour:
   moveSpeed: 7
   smoothMoveTime: 0.01
   turnSpeed: 15
+  ppv: {fileID: 0}
 --- !u!54 &4905280341074881526
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,3 +129,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4905280341074881520}
   m_Mesh: {fileID: 4300000, guid: 28723f10c2a8e094a9351e892f5271b8, type: 3}
+--- !u!114 &3237216522994605429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4905280341074881520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 2fd0a5e04a35c5c4c9987e4893f2ee19, type: 2}
+  isGlobal: 0
+  blendDistance: 3
+  weight: 1
+  priority: 0

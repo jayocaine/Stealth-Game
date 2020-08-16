@@ -8,6 +8,7 @@ public class Guard : MonoBehaviour
     
     public Transform pathHolder;
     public Transform player;
+    public GameObject playerGameObject;
 
     public float speed = 5;
     public float waitTime = .3f;
@@ -124,5 +125,15 @@ public class Guard : MonoBehaviour
             yield return null;
         }
     }
-
+    public void OnCollisionEnter(Collision hitCollide)
+    {
+        if (OnGuardHasSpottedPlayer != null) {
+            if (hitCollide.collider.tag == "Player")
+            {
+                OnGuardHasSpottedPlayer();
+               
+            }
+        }
+       
+    }
 }

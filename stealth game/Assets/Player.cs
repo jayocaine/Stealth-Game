@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Player : MonoBehaviour
 {
@@ -11,11 +12,21 @@ public class Player : MonoBehaviour
     public float smoothMoveTime = .1f;
     public float turnSpeed = 8;
 
+
     float angle;
     float smoothInputMagnitude;
     float smoothMoveVelocity;
 
     bool hasKey;
+    bool hasSpeedBoost;
+    bool speedBoostBool;
+    bool currentlyBoosting;
+
+
+    public AnimationCurve curve;
+    
+    public PostProcessVolume ppv;
+    
 
     Vector3 velocity;
 
@@ -28,6 +39,9 @@ public class Player : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         Guard.OnGuardHasSpottedPlayer += Disable;
+        ppv = GetComponent<PostProcessVolume>();
+        
+
     }
 
     // Update is called once per frame
@@ -45,13 +59,24 @@ public class Player : MonoBehaviour
         angle = Mathf.LerpAngle(angle, targetAngle, Time.deltaTime * turnSpeed * inputMagnitude);
 
         velocity = transform.forward * moveSpeed * smoothInputMagnitude;
-       
-        
+
+        if (Input.GetKeyDown(KeyCode.Space) && hasSpeedBoost) {
+            speedBoostBool = true;
+            hasSpeedBoost = false;
+            StartCoroutine(LensFlairCoroutine());
+            
+        }
+        print(ppv.profile.GetSetting<LensDistortion>().intensity.value);
     }
     private void FixedUpdate()
     {
         rigidBody.MoveRotation(Quaternion.Euler(Vector3.up * angle));
         rigidBody.MovePosition(rigidBody.position + velocity * Time.deltaTime);
+        if (speedBoostBool)
+        {
+            PlayerDash();
+            speedBoostBool = false;
+        }
     }
      void OnTriggerEnter(Collider hitCollider)
     {
@@ -71,6 +96,11 @@ public class Player : MonoBehaviour
             print("haskey");
             Destroy(GameObject.FindGameObjectWithTag("Key"));
         }
+        if (hitCollider.tag == "Speedboost")
+        {
+            hasSpeedBoost = true;           
+            Destroy(GameObject.FindGameObjectWithTag("Speedboost"));
+        }
     }
     void Disable() 
     {
@@ -80,5 +110,25 @@ public class Player : MonoBehaviour
     {
         Guard.OnGuardHasSpottedPlayer -= Disable;           
     }
+    void PlayerDash() 
+    {
+        rigidBody.AddForce(transform.forward * 15, ForceMode.Impulse);
+    }
+    IEnumerator LensFlairCoroutine()
+    {
+        float timer = 0;
+        float originalValue = ppv.profile.GetSetting<LensDistortion>().intensity.value;
+        float duration = 2f;
+        float intensity = 60f;
 
+        while(timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            ppv.profile.GetSetting<LensDistortion>().intensity.value = Mathf.Lerp(originalValue, originalValue + intensity, curve.Evaluate (timer / duration));
+            yield return null;           
+        }
+
+    }
+ 
 }
