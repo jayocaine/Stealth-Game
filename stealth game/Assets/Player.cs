@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     float smoothInputMagnitude;
     float smoothMoveVelocity;
 
-    bool hasKey;
+    public bool hasKey;
     bool hasSpeedBoost;
     bool speedBoostBool;
     bool currentlyBoosting;
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         if(hitCollider.tag == "Key") 
         {
             hasKey = true;
-           // print("haskey");
+            print("haskey");
             Destroy(GameObject.FindGameObjectWithTag("Key"));
         }
         if (hitCollider.tag == "Speedboost")
