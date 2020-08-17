@@ -126,14 +126,11 @@ public class Guard : MonoBehaviour
         }
     }
     public void OnCollisionEnter(Collision hitCollide)
-    {
-        if (OnGuardHasSpottedPlayer != null) {
+    {       
             if (hitCollide.collider.tag == "Player")
             {
-                OnGuardHasSpottedPlayer();
-               
-            }
-        }
+                OnGuardHasSpottedPlayer?.Invoke();              
+            }        
        
     }
 }

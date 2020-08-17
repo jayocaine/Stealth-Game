@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Lifetime;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
     public float smoothMoveTime = .1f;
     public float turnSpeed = 8;
 
+    LensDistortion lensDist;
 
     float angle;
     float smoothInputMagnitude;
@@ -40,6 +42,7 @@ public class Player : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         Guard.OnGuardHasSpottedPlayer += Disable;
         ppv = GetComponent<PostProcessVolume>();
+        lensDist = ppv.profile.GetSetting<LensDistortion>();
         
 
     }
@@ -66,7 +69,7 @@ public class Player : MonoBehaviour
             StartCoroutine(LensFlairCoroutine());
             
         }
-        print(ppv.profile.GetSetting<LensDistortion>().intensity.value);
+        //print(ppv.profile.GetSetting<LensDistortion>().intensity.value);
     }
     private void FixedUpdate()
     {
@@ -93,13 +96,13 @@ public class Player : MonoBehaviour
         if(hitCollider.tag == "Key") 
         {
             hasKey = true;
-            print("haskey");
+           // print("haskey");
             Destroy(GameObject.FindGameObjectWithTag("Key"));
         }
         if (hitCollider.tag == "Speedboost")
         {
             hasSpeedBoost = true;           
-            Destroy(GameObject.FindGameObjectWithTag("Speedboost"));
+           // Destroy(GameObject.FindGameObjectWithTag("Speedboost"));
         }
     }
     void Disable() 
@@ -117,7 +120,7 @@ public class Player : MonoBehaviour
     IEnumerator LensFlairCoroutine()
     {
         float timer = 0;
-        float originalValue = ppv.profile.GetSetting<LensDistortion>().intensity.value;
+        float originalValue = lensDist.intensity.value;
         float duration = 2f;
         float intensity = 60f;
 
@@ -125,7 +128,7 @@ public class Player : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            ppv.profile.GetSetting<LensDistortion>().intensity.value = Mathf.Lerp(originalValue, originalValue + intensity, curve.Evaluate (timer / duration));
+            lensDist.intensity.value = Mathf.Lerp(originalValue, originalValue + intensity, curve.Evaluate (timer / duration));
             yield return null;           
         }
 
