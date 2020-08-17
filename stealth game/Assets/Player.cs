@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
 
         velocity = transform.forward * moveSpeed * smoothInputMagnitude;
 
-        if (Input.GetKeyDown(KeyCode.Space) && hasSpeedBoost) {
+        if (Input.GetKeyDown(KeyCode.Space) && hasSpeedBoost || Input.GetButtonDown("Fire2") && hasSpeedBoost) {
             speedBoostBool = true;
             hasSpeedBoost = false;
             StartCoroutine(LensFlairCoroutine());
