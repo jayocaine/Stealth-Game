@@ -25,14 +25,16 @@ public class GameUI : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire2") )
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                LevelLockManager.Next();
+
             }
         }
         if(gameIsOver && hasLost) 
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire2"))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+                LevelLockManager.MainMenu();
+                
             }
         }
     }
