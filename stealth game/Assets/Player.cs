@@ -24,7 +24,10 @@ public class Player : MonoBehaviour
     bool speedBoostBool;
     bool currentlyBoosting;
 
-    AudioSource soundEffect;
+    public AudioSource soundEffect;
+    public AudioClip keySound;
+    public AudioClip doorSound;
+    public AudioClip boostPickup;
 
 
     public AnimationCurve curve;
@@ -97,7 +100,7 @@ public class Player : MonoBehaviour
             if (OnReachedEndOfLevel != null) 
             {
                 OnReachedEndOfLevel();
-
+                soundEffect.PlayOneShot(doorSound);
             }
             hasKey = false;
         }
@@ -106,9 +109,11 @@ public class Player : MonoBehaviour
             hasKey = true;
             print("haskey");
             Destroy(GameObject.FindGameObjectWithTag("Key"));
+            soundEffect.PlayOneShot(keySound);
         }
         if (hitCollider.tag == "Speedboost")
         {
+            soundEffect.PlayOneShot(boostPickup);
             hasSpeedBoost = true;           
            // Destroy(GameObject.FindGameObjectWithTag("Speedboost"));
         }
