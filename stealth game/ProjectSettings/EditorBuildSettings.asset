@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Level2.unity
     guid: 6d00a92854c304241972696236c8fa33
   - enabled: 1
+    path: Assets/speedBoostLevel.unity
+    guid: 0025f9600c0029e4793e1e9edbd09897
+  - enabled: 1
     path: Assets/Level3.unity
     guid: 7ba64561d4457594c853d1104cf91ddc
   m_configObjects: {}

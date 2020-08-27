@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     bool speedBoostBool;
     bool currentlyBoosting;
 
+    AudioSource soundEffect;
+
 
     public AnimationCurve curve;
     
@@ -43,6 +45,7 @@ public class Player : MonoBehaviour
         Guard.OnGuardHasSpottedPlayer += Disable;
         ppv = GetComponent<PostProcessVolume>();
         lensDist = ppv.profile.GetSetting<LensDistortion>();
+        soundEffect = GetComponent<AudioSource>();
         
 
     }
@@ -63,6 +66,11 @@ public class Player : MonoBehaviour
 
         velocity = transform.forward * moveSpeed * smoothInputMagnitude;
 
+        if(Input.GetAxisRaw("Horizontal") > 0|| Input.GetAxisRaw("Vertical") > 0)
+        {
+            soundEffect.Play();
+        }
+       
         if (Input.GetKeyDown(KeyCode.Space) && hasSpeedBoost || Input.GetButtonDown("Fire2") && hasSpeedBoost) {
             speedBoostBool = true;
             hasSpeedBoost = false;

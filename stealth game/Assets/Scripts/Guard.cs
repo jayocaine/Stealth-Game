@@ -19,6 +19,9 @@ public class Guard : MonoBehaviour
     public float viewDistance;
     private float viewAngle;
 
+    public AudioSource audioSource;
+    public AudioClip riser;
+    private bool hasPlayedSound;
     
 
     float playerVisibleTimer;
@@ -27,7 +30,8 @@ public class Guard : MonoBehaviour
     Color originalSpotlightColor;
     private void Start()
     {
-       
+
+        audioSource = GetComponent<AudioSource>();
         originalSpotlightColor = spotLight.color;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3[] wayPoints = new Vector3[pathHolder.childCount];
@@ -44,8 +48,7 @@ public class Guard : MonoBehaviour
     {
         if (CanSeePlayer()) 
         {
-            playerVisibleTimer += Time.deltaTime;
-            
+            playerVisibleTimer += Time.deltaTime;                                   
         }
         else 
         {
@@ -59,9 +62,16 @@ public class Guard : MonoBehaviour
             if (OnGuardHasSpottedPlayer != null)
             {
                 OnGuardHasSpottedPlayer();
+                
             }
         }
+        if (CanSeePlayer() && !hasPlayedSound)
+        {
+            PlayRiser();
+        }
+        
     }
+
     bool CanSeePlayer() 
     { 
         if(Vector3.Distance(transform.position, player.position) < viewDistance)
@@ -132,5 +142,16 @@ public class Guard : MonoBehaviour
                 OnGuardHasSpottedPlayer?.Invoke();              
             }        
        
+    }
+    private void PlayRiser()
+    {
+        audioSource.PlayOneShot(riser);
+        hasPlayedSound = true;
+        StartCoroutine(PlayedSoundCo());
+    }
+    IEnumerator PlayedSoundCo() 
+    {       
+        yield return new WaitForSeconds(1);
+        hasPlayedSound = false;
     }
 }
