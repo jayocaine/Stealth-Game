@@ -28,6 +28,11 @@ public class LevelLockManager : MonoBehaviour {
     /// </summary>
     private static bool loaded = false;
 
+    /// <summary>
+    /// The level the player is currently enjoying
+    /// </summary>
+    private static int currentLevel = 0;
+
     #endregion
 
     #region --INSPECTOR FIELDS--
@@ -67,7 +72,7 @@ public class LevelLockManager : MonoBehaviour {
     /// Go to the next level and unlock it
     /// </summary>
     public static void Next() {
-        GoToLevel(CurrentUnlockedLevel + 1);
+        GoToLevel(currentLevel + 1);
     }
 
     /// <summary>
@@ -108,11 +113,15 @@ public class LevelLockManager : MonoBehaviour {
     /// <param name="levelId"></param>
     public static void GoToLevel(int levelId) {
 
-        //Unlock next level
-        currentUnlockedLevel = levelId;
+        currentLevel = levelId;
+        //Don't update the current unlocked level if it's a level we've already completed
+        if ( levelId > currentUnlockedLevel) {
+            //Unlock next level
+            currentUnlockedLevel = levelId;
 
-        //Save current unlocked level
-        PlayerPrefs.SetInt("CurrentUnlockedLevel", currentUnlockedLevel);
+            //Save current unlocked level
+            PlayerPrefs.SetInt("CurrentUnlockedLevel", currentUnlockedLevel);
+        }
 
         //Load level
         UnityEngine.SceneManagement.SceneManager.LoadScene(instance.firstLevelSceneNumber + levelId);
