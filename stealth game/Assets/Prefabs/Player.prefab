@@ -113,7 +113,34 @@ MonoBehaviour:
   zoom: {fileID: 8300000, guid: 5a0f94fad6ccf034f8a67429cbaf80e4, type: 3}
   curve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.5270212
+      outSlope: 2.5270212
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25933743
+      value: 0.65535116
+      inSlope: 0.005098928
+      outSlope: 0.005098928
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5790863
+      value: -0.0026550293
+      inSlope: -0.7212773
+      outSlope: -0.7212773
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.88486415
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

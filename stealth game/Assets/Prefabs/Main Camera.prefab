@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 5689428050285200241, guid: 0ed418785f299684dbd77035f016ae2f,
+  volumeTrigger: {fileID: 4905280341074881527, guid: e4e4757787c777542b3a64fa9127a875,
     type: 3}
   volumeLayer:
     serializedVersion: 2
