@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     public AudioClip keySound;
     public AudioClip doorSound;
     public AudioClip boostPickup;
+    public AudioClip zoom;
 
 
     public AnimationCurve curve;
@@ -77,6 +78,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && hasSpeedBoost || Input.GetButtonDown("Fire2") && hasSpeedBoost) {
             speedBoostBool = true;
             hasSpeedBoost = false;
+            soundEffect.PlayOneShot(zoom);
             StartCoroutine(LensFlairCoroutine());
             
         }

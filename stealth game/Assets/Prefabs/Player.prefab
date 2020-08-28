@@ -109,7 +109,8 @@ MonoBehaviour:
   soundEffect: {fileID: 3675495913613628650}
   keySound: {fileID: 8300000, guid: 902fd79e809616b409cca22c20a9931a, type: 3}
   doorSound: {fileID: 8300000, guid: ce28f7eede9c4a14aa5ab598366324b9, type: 3}
-  boostPickup: {fileID: 8300000, guid: f4dd864c53547624bbb369bb510b3fac, type: 3}
+  boostPickup: {fileID: 8300000, guid: 20bcd3e4ce7f52b4ab7a448bd7e9d5be, type: 3}
+  zoom: {fileID: 8300000, guid: 5a0f94fad6ccf034f8a67429cbaf80e4, type: 3}
   curve:
     serializedVersion: 2
     m_Curve: []
@@ -170,7 +171,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 0
   Mute: 0
