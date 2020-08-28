@@ -21,6 +21,12 @@ public class GameUI : MonoBehaviour
   
     void Update()
     {
+        //exit to main menu on presing escape
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            LevelLockManager.MainMenu();
+        }
+
         if (gameIsOver && hasWon) 
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire2") )
@@ -51,6 +57,11 @@ public class GameUI : MonoBehaviour
     }
     void OnGameOver(GameObject gameOverUI)
     {
+        //Ignore this if the scene has already been destroyed
+        if ( gameOverUI == null) {
+            return;
+        }
+
         gameOverUI.SetActive(true);
         gameIsOver = true;
         Guard.OnGuardHasSpottedPlayer -= ShowGameLoseUI;
