@@ -153,7 +153,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press space to play again
+  m_Text: Press space to select level
 --- !u!1 &81718934592373134
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +300,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press space to play again
+  m_Text: Press space to proceed
 --- !u!1 &81718935166041210
 GameObject:
   m_ObjectHideFlags: 0
